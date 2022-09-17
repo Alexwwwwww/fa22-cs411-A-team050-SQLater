@@ -1,4 +1,4 @@
-# A-team000-sample
+# A-team050-SQLater
 
 ## Basic Information
 
@@ -6,8 +6,8 @@
 | ----------- | ---------------------- |
 | TeamID      |        Team-050        |
 | TeamName    |         SQLater        |
-| Captain     |            ?           |
-| Captain     |            ?           |
+| Captain     |       Roger Wang       |
+| Captain     |   rogerw2@illinois.edu |
 | Member1     |       Riya Verma       |
 | Member1     |   rverm2@illinois.edu  |
 | Member2     |                        |
