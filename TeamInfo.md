@@ -12,8 +12,8 @@
 | Member1     |   rverm2@illinois.edu  |
 | Member2     |     Abheer Jasuja      |
 | Member2     |  ajasuja2@illinois.edu |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |      Yumeng Wang       |
+| Member3     | yumeng10@illinois.edu  |
 
 ## Project Information
 
