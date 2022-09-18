@@ -1,1 +1,1 @@
-# fall22-cs411-A-team050-SQLater
+# A-team050-SQLater
