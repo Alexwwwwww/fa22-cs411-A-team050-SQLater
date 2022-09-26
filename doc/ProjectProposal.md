@@ -1,5 +1,4 @@
-# Project Title
-CS 411 Course Staff Dashboard
+# CS 411 Course Staff Dashboard
 
 ## Project Summary
 We aim to create a web app that allows CS 411 instructors and course staff to view analytics about student performance. Using either PrairieLearn and Canvas or auto generated data, the app would use student assignment performance to easily give the course staff feedback on the difficulty of the assignments and how students are collaborating.
