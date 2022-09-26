@@ -42,10 +42,13 @@ A creative component that we want to implement is a GA group generator that pair
 
 ## UI Mockup
 
-Navigation bar: Overall Assignment Statistics, Student Assignment Statistics?, Homework Assignment Statistics, GA Group Assignment Statistics, Struggling Students Rankings, Student Interaction with Course Website
- 
-
-
+Navigation bar: `Overall Assignment Statistics`, `Student Assignment Statistics`?, `Homework Assignment Statistics`, `GA Group Assignment Statistics`, `Struggling Students Rankings`, `Student Interaction with Course Website`
+- Homework assignment statistics:
+![alt text](https://github.com/cs411-alawini/fa22-cs411-A-team050-SQLater/blob/main/doc/Homework%20Assignment%20Statistics.png)
+- Group assignment statistics:
+![alt text](https://github.com/cs411-alawini/fa22-cs411-A-team050-SQLater/blob/main/doc/Group%20Assignment%20Statistics.png)
+- Overall Assignment statitics:
+![alt text](https://github.com/cs411-alawini/fa22-cs411-A-team050-SQLater/blob/main/doc/Overall%20Assignment%20Statistics.png)
 ## Project work distribution
 
 We will be pair programming with two people working on the frontend and backend. These are the main functionalities of the project and we plan on splitting up the work as below.
