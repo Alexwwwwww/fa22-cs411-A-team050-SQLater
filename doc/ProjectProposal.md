@@ -50,11 +50,11 @@ Navigation bar: Overall Assignment Statistics, Student Assignment Statistics?, H
 
 We will be pair programming with two people working on the frontend and backend. These are the main functionalities of the project and we plan on splitting up the work as below.
  
-Graph Generation - ajasuja2
-Assignment Page - rverm2, yumeng10
-Homework Page/GA Page - ajasuja2, rogerw2
-Creative Component Code: rverm2, rogerw2
-Generating Dataset (if needed): rverm2, yumeng10
-Machine Learning Model (if time): ajasuja2, rogerw2, rverm2, yumeng10
+* Graph Generation - ajasuja2
+* Assignment Page - rverm2, yumeng10
+* Homework Page/GA Page - ajasuja2, rogerw2
+* Creative Component Code: rverm2, rogerw2
+* Generating Dataset (if needed): rverm2, yumeng10
+* Machine Learning Model (if time): ajasuja2, rogerw2, rverm2, yumeng10
 
 
