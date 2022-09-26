@@ -4,10 +4,12 @@ CS 411 Course Staff Dashboard
 ## Project Summary
 We aim to create a web app that allows CS 411 instructors and course staff to view analytics about student performance. Using either PrairieLearn and Canvas or auto generated data, the app would use student assignment performance to easily give the course staff feedback on the difficulty of the assignments and how students are collaborating.
 
+<!--
 This is our understanding of the full 411 dashboard:-
 * It's a website that filters and displays collaboration stats for each GA group (problems completed, number of submissions, problems completed, student submission interactions, time to complete each problem, etc.).
 * It can record the last date of attendance for each student from PL, Canvas, Campuswire, and in-person attendance.
 * It may also use ML models to find struggling students based on some inputs (number of submissions, types of problem interactions, SQL code structure, etc.).
+-->
 
 ## Description
 CS 411 instructors and course staff do not currently have a comprehensive system for tracking individual and group activity. This will help them understand how students are working through the homework questions and collaborating on GAs together. We may use machine learning models to help course staff identify struggling students using these input statistics. The app will also contain the last date of attendance for each student from different course websites, such as PrairieLearn, Canvas, and Campuswire. This would be helpful when the course staff are requested this information by the college.
