@@ -8,6 +8,7 @@ app = Flask(__name__)
 def home():
   return 'HOME PAGE'
 
+#Homework Assignments CRUD
 @app.route('/showHW', methods=['GET'])
 def show_hw():
   result = db.show_hw_assignment()
@@ -15,18 +16,59 @@ def show_hw():
 
 @app.route('/insertHW', methods=['POST'])
 def insert_hw():
-  result = db.insert_hw_assignment(request.get_json())
-  return result
+  db.insert_hw_assignment(request.get_json())
+  return show_hw()
 
 @app.route('/updateHW', methods=['PUT'])
 def update_hw():
-  result = db.update_hw_title(request.get_json())
-  return result
+  db.update_hw_title(request.get_json())
+  return show_hw()
 
 @app.route('/deleteHW', methods=['DELETE'])
 def delete_hw():
-  result = db.delete_hw_assignment(request.get_json())
-  return result
+  db.delete_hw_assignment(request.get_json())
+  return show_hw()
+
+#Don't need
+# @app.route('/searchHW', methods=['POST', 'GET'])
+# def search_hw():
+#   return db.search_hw_assignment(request.get_json())
+
+#Homework Submissions
+@app.route('/searchUserHW', methods=['POST', 'GET'])
+def search_user():
+  return db.search_user_hw(request.get_json())
+
+
+#User CRUD
+# @app.route('/showUser', methods=['GET'])
+# def show_user():
+#   return db.show_user()
+
+# @app.route('/insertUser', methods=['POST'])
+# def insert_user():
+#   db.insert_user(request.get_json())
+#   return db.show_user()
+
+#Homework Submissions
+# @app.route('/searchHWSubmission', methods=['POST'])
+# def search_hw_sub(request.get_json()):
+#   return None
+
+# @app.route('/insertHWSubmission', methods=['POST'])
+# def insert_hw_sub():
+#   db.insert_hw_submission(request.get_json())
+#   return db.show_user()
+
+# @app.route('/updateHWSubmission', methods=['PUT'])
+# def update_hw_sub():
+#   db.update_hw_submission(request.get_json())
+#   return db.show_user()
+
+# @app.route('/deleteHWSubmission', methods=['DELETE'])
+# def delete_hw_sub():
+#   db.delete_hw_submission(request.get_json())
+#   return db.show_user()
 
 if __name__ == '__main__':
   app.run(debug=True)
