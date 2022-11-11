@@ -1,8 +1,11 @@
 #main.py
 from flask import Flask, jsonify, request
 import db
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/')
 def home():
@@ -36,6 +39,7 @@ def delete_hw():
 
 #Homework Submissions
 @app.route('/searchUserHW', methods=['POST', 'GET'])
+@cross_origin()
 def search_user():
   return db.search_user_hw(request.get_json())
 

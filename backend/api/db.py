@@ -46,7 +46,8 @@ def show_hw_assignment():
   query = ("SELECT * FROM Homework_Assignments")
   cursor = mydb.cursor()
   cursor.execute(query)
-  result = cursor.fetchall()
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
   assignments = jsonify(result)
   cursor.close()
   mydb.close()
