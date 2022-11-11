@@ -18,16 +18,19 @@ def show_hw():
   return result
 
 @app.route('/insertHW', methods=['POST'])
+@cross_origin()
 def insert_hw():
   db.insert_hw_assignment(request.get_json())
   return show_hw()
 
 @app.route('/updateHW', methods=['PUT'])
+@cross_origin()
 def update_hw():
   db.update_hw_title(request.get_json())
   return show_hw()
 
 @app.route('/deleteHW', methods=['DELETE'])
+@cross_origin()
 def delete_hw():
   db.delete_hw_assignment(request.get_json())
   return show_hw()
