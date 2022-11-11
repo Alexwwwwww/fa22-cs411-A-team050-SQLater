@@ -11,6 +11,9 @@ function App() {
   const [updateHW_id, setupdateHW_ID] = useState("");
   const [updateHW_Name, setupdateHW_Name] = useState("");
   const [deleteHW_id, setdeleteHW_id] = useState("");
+  const [avgScoreByQuestionHWGA, setAvgScoreByQuestionHWGA] = useState("");
+  const [uinAverageScoreGreaterThanGA, setUINAverageScoreGreaterThanGA] = useState("");
+  const [uinAverageScoreGreaterThanGA_id, setUINAverageScoreGreaterThanGA_id] = useState("");
 
   const uinChangeHandler = async (event) => {
     setEnteredUIN(event.target.value);
@@ -28,6 +31,10 @@ function App() {
   };
   const deletehw_idChangleHandler = async (event) => {
     setdeleteHW_id(event.target.value);
+    console.log(event.target.value); 
+  };
+  const uinAverageScoreGreaterThanGA_idChangeHandler = async (event) => {
+    setUINAverageScoreGreaterThanGA_id(event.target.value);
     console.log(event.target.value); 
   };
 
@@ -135,6 +142,24 @@ function App() {
     }
   };
 
+  const displayAvgScoreByQuestionHWGA = () => {
+    fetch("/getAvgScoreByQuestionHWGA")
+      .then((res) => res.json())
+      .then((avgScoreByQuestionHWGA) => {
+        setAvgScoreByQuestionHWGA(avgScoreByQuestionHWGA);
+        console.log(avgScoreByQuestionHWGA);
+      });
+  };
+  
+  const displayUINAverageScoreGreaterThanGA = () => {
+    fetch("/getUINAvgScoreGreaterThanGA")
+      .then((res) => res.json())
+      .then((uinAverageScoreGreaterThanGA) => {
+        setUINAverageScoreGreaterThanGA(uinAverageScoreGreaterThanGA);
+        console.log(uinAverageScoreGreaterThanGA);
+      });
+  };
+
   return (
     <>
       <div>
@@ -218,6 +243,22 @@ function App() {
           <button type="submit">Submit</button>
         </form>
       </div>
+      <br />
+      <div>
+        <button onClick={displayAvgScoreByQuestionHWGA}>Get average score by question for GA and HW assignments</button>
+        {avgScoreByQuestionHWGA}
+      </div>
+      <br />
+      {/*
+      <div>
+        <input
+          type="text"
+          value={uinAverageScoreGreaterThanGA_id}
+          onChange={uinAverageScoreGreaterThanGA_idChangeHandler}        
+        ></input>
+        <button onClick={displayUINAverageScoreGreaterThanGA}>Get average score by question for GA and HW assignments</button>
+      </div>
+      */}
     </>
   );
 }

@@ -35,6 +35,17 @@ def delete_hw():
   db.delete_hw_assignment(request.get_json())
   return show_hw()
 
+# Advanced queries
+@app.route('/getAvgScoreByQuestionHWGA', methods=['POST', 'GET'])
+@cross_origin()
+def advanced_query1():
+  return db.get_avg_score_by_question_hw_ga(request.get_json())
+
+@app.route('/getUINAvgScoreGreaterThanGA', methods=['POST', 'GET'])
+@cross_origin()
+def advanced_query2(score):
+  return db.get_uin_average_score_greater_than_ga(request.get_json())
+
 #Don't need
 # @app.route('/searchHW', methods=['POST', 'GET'])
 # def search_hw():
@@ -45,7 +56,6 @@ def delete_hw():
 @cross_origin()
 def search_user():
   return db.search_user_hw(request.get_json())
-
 
 #User CRUD
 # @app.route('/showUser', methods=['GET'])
