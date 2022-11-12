@@ -45,11 +45,11 @@ def get_avg_score_by_question_hw_ga():
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("""
-    SELECT ga_name, NULL AS hw_name, question_number, AVG(question_score)
+    SELECT ga_name as 'as_name', question_number, ROUND(AVG(question_score),1) as avg_score
     FROM GA_Questions NATURAL JOIN GA_Assignments
     GROUP BY ga_id, question_number
     UNION
-    SELECT NULL, hw_name, question_number, AVG(question_score)
+    SELECT hw_name as 'as_name', question_number, ROUND(AVG(question_score), 1) as avg_score
     FROM Homework_Questions NATURAL JOIN Homework_Assignments
     GROUP BY hw_id, question_number
   """)
