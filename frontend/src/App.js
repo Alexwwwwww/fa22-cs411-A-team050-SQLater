@@ -39,10 +39,6 @@ function App() {
     setdeleteHW_id(event.target.value);
     console.log(event.target.value);
   };
-  // const uinAverageScoreGreaterThanGA_idChangeHandler = async (event) => {
-  //   setUINAverageScoreGreaterThanGA_id(event.target.value);
-  //   console.log(event.target.value);
-  // };
 
   const HW_NameChangleHandler = async (event) => {
     setHW_Name(event.target.value);
@@ -172,15 +168,6 @@ function App() {
       });
   };
 
-  // const displayUINAverageScoreGreaterThanGA = () => {
-  //   fetch("/getUINAvgScoreGreaterThanGA")
-  //     .then((res) => res.json())
-  //     .then((uinAverageScoreGreaterThanGA) => {
-  //       setUINAverageScoreGreaterThanGA(uinAverageScoreGreaterThanGA);
-  //       console.log(uinAverageScoreGreaterThanGA);
-  //     });
-  // };
-
   return (
     <>
       <div>
@@ -274,9 +261,6 @@ function App() {
         <button onClick={displayAvgScoreByQuestionHWGA}>
           Get average score by question for GA and HW assignments
         </button>
-        {/* {avgScoreByQuestionHWGA.map((hw) => (
-          <li>{`ga_id: ${hw["ga_id"]} hw_id: ${hw["hw_id"]} question_number: ${hw["question_number"]}: avg_question_score: ${hw["AVG(question_score)"]}`}</li>
-        ))} */}
         <table>
           <tr>
             <th>GA_Name</th>
