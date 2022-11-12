@@ -12,7 +12,7 @@ function App() {
   const [updateHW_Name, setupdateHW_Name] = useState("");
   const [deleteHW_id, setdeleteHW_id] = useState("");
   const [avgScoreByQuestionHWGA, setAvgScoreByQuestionHWGA] = useState([{}]);
-  const [uinAverageScoreGreaterThanGA, setUINAverageScoreGreaterThanGA] = useState("");
+  const [uinAverageScoreGreaterThanGA, setUINAverageScoreGreaterThanGA] = useState([{}]);
   const [uinAverageScoreGreaterThanGA_id, setUINAverageScoreGreaterThanGA_id] = useState("");
 
   const uinChangeHandler = async (event) => {
@@ -249,7 +249,7 @@ function App() {
         {avgScoreByQuestionHWGA.map((hw) => <li>{`${hw["ga_id"]} ${hw["hw_id"]} ${hw["question_number"]}: ${hw["AVG(question_score)"]}`}</li>)}
       </div>
       <br />
-      {/*
+      
       <div>
         <input
           type="text"
@@ -257,8 +257,9 @@ function App() {
           onChange={uinAverageScoreGreaterThanGA_idChangeHandler}        
         ></input>
         <button onClick={displayUINAverageScoreGreaterThanGA}>Get average score by question for GA and HW assignments</button>
+        {uinAverageScoreGreaterThanGA.map((hw) => <li>{`${hw["uin"]} ${hw["AVG(score)"]}`}</li>)}
       </div>
-      */}
+     
     </>
   );
 }

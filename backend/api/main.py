@@ -43,7 +43,7 @@ def advanced_query1():
 
 @app.route('/getUINAvgScoreGreaterThanGA', methods=['POST', 'GET'])
 @cross_origin()
-def advanced_query2(score):
+def advanced_query2():
   return db.get_uin_average_score_greater_than_ga(request.get_json())
 
 #Don't need
