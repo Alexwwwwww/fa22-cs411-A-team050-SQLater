@@ -45,12 +45,12 @@ def get_avg_score_by_question_hw_ga():
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("""
-    SELECT ga_id, NULL AS hw_id, question_number, AVG(question_score)
-    FROM GA_Questions
+    SELECT ga_name as 'as_name', question_number, ROUND(AVG(question_score),1) as avg_score
+    FROM GA_Questions NATURAL JOIN GA_Assignments
     GROUP BY ga_id, question_number
     UNION
-    SELECT NULL, hw_id, question_number, AVG(question_score)
-    FROM Homework_Questions
+    SELECT hw_name as 'as_name', question_number, ROUND(AVG(question_score), 1) as avg_score
+    FROM Homework_Questions NATURAL JOIN Homework_Assignments
     GROUP BY hw_id, question_number
   """)
   columns = cursor.description 
@@ -60,20 +60,27 @@ def get_avg_score_by_question_hw_ga():
   mydb.close()
   return res
 
-def get_uin_average_score_greater_than_ga(data):
+def get_uin_overall_grade(data):
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("""
-    SELECT uin, AVG(score) avg_ga_score
-    FROM GA_Submissions NATURAL JOIN GA_Groups
-    WHERE ga_id IN (0,1)
-    GROUP BY uin
-    HAVING avg_ga_score >= %s
-    ORDER BY avg_ga_score DESC
-  """, (data['score'],))
+    SELECT t1.uin as uin, t2.name as name, ROUND(t1.avg_ga_score, 1) as avg_ga_score, ROUND(t2.avg_hw_score,1) as avg_hw_score, ROUND((t1.avg_ga_score + t2.avg_hw_score)*0.5,1) as total_score
+    FROM (SELECT uin, (AVG(score)*2) avg_ga_score
+          FROM GA_Submissions NATURAL JOIN GA_Group_Members
+          WHERE ga_id IN (0,1)
+          GROUP BY uin) AS t1
+    JOIN (SELECT h.uin as uin, s.name as name, (AVG(h.score) + 8) avg_hw_score
+          FROM Homework_Submissions h NATURAL JOIN Students s
+          WHERE h.hw_id IN (0,1)
+          GROUP BY h.uin) AS t2 ON (t1.uin = t2.uin)
+    WHERE (t1.avg_ga_score + t2.avg_hw_score)*0.5 >= %s
+    ORDER BY total_score DESC
+    LIMIT 25
+  """, (data['min_grade'],))
   columns = cursor.description 
   result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
   user_grades = jsonify(result)
+  print(user_grades)
   cursor.close()
   mydb.close()
   return user_grades
