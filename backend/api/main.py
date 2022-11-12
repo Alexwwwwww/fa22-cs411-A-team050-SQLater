@@ -41,10 +41,10 @@ def delete_hw():
 def advanced_query1():
   return db.get_avg_score_by_question_hw_ga()
 
-@app.route('/getUINAvgScoreGreaterThanGA', methods=['POST', 'GET'])
+@app.route('/getUINOverallGrade', methods=['POST', 'GET'])
 @cross_origin()
-def advanced_query2(score):
-  return db.get_uin_average_score_greater_than_ga(request.get_json())
+def advanced_query2():
+  return db.get_uin_overall_grade(request.get_json())
 
 #Don't need
 # @app.route('/searchHW', methods=['POST', 'GET'])

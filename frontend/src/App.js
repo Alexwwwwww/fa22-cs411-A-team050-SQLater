@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
   const [assignments, setAssignments] = useState([{}]);
@@ -12,8 +13,13 @@ function App() {
   const [updateHW_Name, setupdateHW_Name] = useState("");
   const [deleteHW_id, setdeleteHW_id] = useState("");
   const [avgScoreByQuestionHWGA, setAvgScoreByQuestionHWGA] = useState([{}]);
-  const [uinAverageScoreGreaterThanGA, setUINAverageScoreGreaterThanGA] = useState("");
-  const [uinAverageScoreGreaterThanGA_id, setUINAverageScoreGreaterThanGA_id] = useState("");
+  const [UINOverallGrade, setUINOverallGrade] = useState([{}]);
+  const [enteredGradeFilter, setEnteredGradeFilter] = useState("");
+
+  const enteredGradeChangeHandler = async (event) => {
+    setEnteredGradeFilter(event.target.value);
+    console.log(event.target.value);
+  };
 
   const uinChangeHandler = async (event) => {
     setEnteredUIN(event.target.value);
@@ -22,29 +28,28 @@ function App() {
 
   const hw_idChangleHandler = async (event) => {
     setHW_ID(event.target.value);
-    console.log(event.target.value); 
+    console.log(event.target.value);
   };
 
   const updatehw_idChangleHandler = async (event) => {
     setupdateHW_ID(event.target.value);
-    console.log(event.target.value); 
+    console.log(event.target.value);
   };
   const deletehw_idChangleHandler = async (event) => {
     setdeleteHW_id(event.target.value);
-    console.log(event.target.value); 
+    console.log(event.target.value);
   };
-  const uinAverageScoreGreaterThanGA_idChangeHandler = async (event) => {
-    setUINAverageScoreGreaterThanGA_id(event.target.value);
-    console.log(event.target.value); 
-  };
+  // const uinAverageScoreGreaterThanGA_idChangeHandler = async (event) => {
+  //   setUINAverageScoreGreaterThanGA_id(event.target.value);
+  //   console.log(event.target.value);
+  // };
 
-
-  const HW_NameChangleHandler= async (event) => {
+  const HW_NameChangleHandler = async (event) => {
     setHW_Name(event.target.value);
     console.log(event.target.value);
   };
 
-  const updateHW_NameChangleHandler= async (event) => {
+  const updateHW_NameChangleHandler = async (event) => {
     setupdateHW_Name(event.target.value);
     console.log(event.target.value);
   };
@@ -62,10 +67,9 @@ function App() {
       url: "http://127.0.0.1:5000/deleteHW",
       data: data,
     }).then((response) => {
-        console.log(response.data);
-      });
-    setdeleteHW_id("")
-  
+      console.log(response.data);
+    });
+    setdeleteHW_id("");
   };
 
   const SubmitUpdateHandler = async (event) => {
@@ -75,17 +79,17 @@ function App() {
 
     const data = {
       hw_id: updateHW_id,
-      hw_name:updateHW_Name,
+      hw_name: updateHW_Name,
     };
     axios({
       method: "PUT",
       url: "http://127.0.0.1:5000/updateHW",
       data: data,
     }).then((response) => {
-        console.log(response.data);
-      });
-    setupdateHW_ID("")
-    setupdateHW_Name("")
+      console.log(response.data);
+    });
+    setupdateHW_ID("");
+    setupdateHW_Name("");
   };
 
   const SubmitInsertHandler = async (event) => {
@@ -95,21 +99,19 @@ function App() {
 
     const data = {
       hw_id: enteredHW_id,
-      hw_name:enteredHW_Name,
+      hw_name: enteredHW_Name,
     };
     axios({
       method: "POST",
       url: "http://127.0.0.1:5000/insertHW",
       data: data,
     }).then((response) => {
-        console.log(response.data);
-      });
+      console.log(response.data);
+    });
     setHW_ID("");
     setHW_Name("");
   };
 
-
-  
   const SubmitUINHandler = async (event) => {
     event.preventDefault();
     console.log("Sending POST API CALL");
@@ -123,10 +125,29 @@ function App() {
       url: "http://127.0.0.1:5000/searchUserHW",
       data: data,
     }).then((response) => {
-        setHwSubmissions(response.data);
-        console.log(response.data);
-      });
+      setHwSubmissions(response.data);
+      console.log(response.data);
+    });
     setEnteredUIN("");
+  };
+
+  const SubmitGradeFilterHandler = async (event) => {
+    event.preventDefault();
+    console.log("Sending POST API CALL");
+
+    const data = {
+      min_grade: enteredGradeFilter,
+    };
+
+    axios({
+      method: "POST",
+      url: "http://127.0.0.1:5000/getUINOverallGrade",
+      data: data,
+    }).then((response) => {
+      setUINOverallGrade(response.data);
+      console.log(response.data);
+    });
+    setEnteredGradeFilter("");
   };
 
   const displayAssignmentHandler = () => {
@@ -150,15 +171,15 @@ function App() {
         console.log(avgScoreByQuestionHWGA);
       });
   };
-  
-  const displayUINAverageScoreGreaterThanGA = () => {
-    fetch("/getUINAvgScoreGreaterThanGA")
-      .then((res) => res.json())
-      .then((uinAverageScoreGreaterThanGA) => {
-        setUINAverageScoreGreaterThanGA(uinAverageScoreGreaterThanGA);
-        console.log(uinAverageScoreGreaterThanGA);
-      });
-  };
+
+  // const displayUINAverageScoreGreaterThanGA = () => {
+  //   fetch("/getUINAvgScoreGreaterThanGA")
+  //     .then((res) => res.json())
+  //     .then((uinAverageScoreGreaterThanGA) => {
+  //       setUINAverageScoreGreaterThanGA(uinAverageScoreGreaterThanGA);
+  //       console.log(uinAverageScoreGreaterThanGA);
+  //     });
+  // };
 
   return (
     <>
@@ -179,7 +200,12 @@ function App() {
             <button type="submit">Submit</button>
             {userHWSubmissions.map((hw) => (
               <li key={hw.uin}>
-                {"hw_id: " + hw.hw_id + "  score: " + hw.score + "  time_taken: " + hw.time_taken}
+                {"hw_id: " +
+                  hw.hw_id +
+                  "  score: " +
+                  hw.score +
+                  "  time_taken: " +
+                  hw.time_taken}
               </li>
             ))}
           </label>
@@ -191,17 +217,17 @@ function App() {
           <label>
             Enter the Hw_id:
             <input
-            type="text"
-            value={enteredHW_id}
-            onChange={hw_idChangleHandler}        
+              type="text"
+              value={enteredHW_id}
+              onChange={hw_idChangleHandler}
             ></input>
           </label>
           <label>
-          &nbsp;&nbsp;Enter the HW_Name:
+            &nbsp;&nbsp;Enter the HW_Name:
             <input
-            type="text"
-            value={enteredHW_Name}
-            onChange={HW_NameChangleHandler}
+              type="text"
+              value={enteredHW_Name}
+              onChange={HW_NameChangleHandler}
             ></input>
             <button type="submit">Submit</button>
           </label>
@@ -213,17 +239,17 @@ function App() {
           <label>
             Enter the Hw_id:
             <input
-            type="text"
-            value={updateHW_id}
-            onChange={updatehw_idChangleHandler}        
+              type="text"
+              value={updateHW_id}
+              onChange={updatehw_idChangleHandler}
             ></input>
           </label>
           <label>
-          &nbsp;&nbsp;Enter the HW_Name:
+            &nbsp;&nbsp;Enter the HW_Name:
             <input
-            type="text"
-            value={updateHW_Name}
-            onChange={updateHW_NameChangleHandler}
+              type="text"
+              value={updateHW_Name}
+              onChange={updateHW_NameChangleHandler}
             ></input>
             <button type="submit">Submit</button>
           </label>
@@ -235,9 +261,9 @@ function App() {
           <label>
             Enter the Hw_id:
             <input
-            type="text"
-            value={deleteHW_id}
-            onChange={deletehw_idChangleHandler}        
+              type="text"
+              value={deleteHW_id}
+              onChange={deletehw_idChangleHandler}
             ></input>
           </label>
           <button type="submit">Submit</button>
@@ -245,20 +271,64 @@ function App() {
       </div>
       <br />
       <div>
-        <button onClick={displayAvgScoreByQuestionHWGA}>Get average score by question for GA and HW assignments</button>
-        {avgScoreByQuestionHWGA.map((hw) => <li>{`${hw["ga_id"]} ${hw["hw_id"]} ${hw["question_number"]}: ${hw["AVG(question_score)"]}`}</li>)}
+        <button onClick={displayAvgScoreByQuestionHWGA}>
+          Get average score by question for GA and HW assignments
+        </button>
+        {/* {avgScoreByQuestionHWGA.map((hw) => (
+          <li>{`ga_id: ${hw["ga_id"]} hw_id: ${hw["hw_id"]} question_number: ${hw["question_number"]}: avg_question_score: ${hw["AVG(question_score)"]}`}</li>
+        ))} */}
+        <table>
+          <tr>
+            <th>GA_Name</th>
+            <th>HW_Name</th>
+            <th>Question Number</th>
+            <th>Average Question Score</th>
+          </tr>
+          <tbody>
+            {avgScoreByQuestionHWGA.map((hw) => (
+              <tr>
+                <td>{hw["ga_name"]}</td>
+                <td>{hw["hw_name"]}</td>
+                <td>{hw["question_number"]}</td>
+                <td>{hw["AVG(question_score)"]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h5>You Ran Advanced Query #1</h5>
       </div>
       <br />
-      {/*
-      <div>
-        <input
-          type="text"
-          value={uinAverageScoreGreaterThanGA_id}
-          onChange={uinAverageScoreGreaterThanGA_idChangeHandler}        
-        ></input>
-        <button onClick={displayUINAverageScoreGreaterThanGA}>Get average score by question for GA and HW assignments</button>
-      </div>
-      */}
+      <form onSubmit={SubmitGradeFilterHandler}>
+        <label>
+          Get all students with an average grade above:
+          <input
+            type="text"
+            value={enteredGradeFilter}
+            onChange={enteredGradeChangeHandler}
+          ></input>
+        </label>
+        <button type="submit">Submit</button>
+        <table>
+          <tr>
+            <th>UIN</th>
+            <th>Name</th>
+            <th>Total_score</th>
+            <th>Average GA score</th>
+            <th>Average HW score</th>
+          </tr>
+          <tbody>
+            {UINOverallGrade.map((student) => (
+              <tr>
+                <td>{student["uin"]}</td>
+                <td>{student["name"]}</td>
+                <td>{student["total_score"]}</td>
+                <td>{student["avg_ga_score"]}</td>
+                <td>{student["avg_hw_score"]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </form>
     </>
   );
 }
