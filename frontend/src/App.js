@@ -295,7 +295,6 @@ function App() {
             ))}
           </tbody>
         </table>
-        <h5>You Ran Advanced Query #1</h5>
       </div>
       <br />
       <form onSubmit={SubmitGradeFilterHandler}>
