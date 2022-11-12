@@ -11,7 +11,7 @@ function App() {
   const [updateHW_id, setupdateHW_ID] = useState("");
   const [updateHW_Name, setupdateHW_Name] = useState("");
   const [deleteHW_id, setdeleteHW_id] = useState("");
-  const [avgScoreByQuestionHWGA, setAvgScoreByQuestionHWGA] = useState("");
+  const [avgScoreByQuestionHWGA, setAvgScoreByQuestionHWGA] = useState([{}]);
   const [uinAverageScoreGreaterThanGA, setUINAverageScoreGreaterThanGA] = useState("");
   const [uinAverageScoreGreaterThanGA_id, setUINAverageScoreGreaterThanGA_id] = useState("");
 
@@ -246,7 +246,7 @@ function App() {
       <br />
       <div>
         <button onClick={displayAvgScoreByQuestionHWGA}>Get average score by question for GA and HW assignments</button>
-        {avgScoreByQuestionHWGA}
+        {avgScoreByQuestionHWGA.map((hw) => <li>{`${hw["ga_id"]} ${hw["hw_id"]} ${hw["question_number"]}: ${hw["AVG(question_score)"]}`}</li>)}
       </div>
       <br />
       {/*

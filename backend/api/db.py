@@ -41,7 +41,7 @@ def delete_hw_assignment(data):
   mydb.close()
   return 'DELETED HW ASSIGNMENT'
 
-def get_avg_score_by_question_hw_ga(data):
+def get_avg_score_by_question_hw_ga():
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("""
