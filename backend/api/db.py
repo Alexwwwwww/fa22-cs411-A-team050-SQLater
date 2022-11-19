@@ -105,17 +105,6 @@ def show_hw_assignment():
   mydb.close()
   return assignments
 
-#Don't Need
-# def search_hw_assignment(data):
-#   mydb = open_connection()
-#   cursor = mydb.cursor()
-#   cursor.execute("SELECT * FROM Homework_Assignments WHERE hw_name LIKE %s", (data["hw_name_prefix"] + "%",))
-#   result = cursor.fetchall()
-#   assignments = jsonify(result)
-#   cursor.close()
-#   mydb.close()
-#   return assignments
-
 def search_user_hw(data):
   mydb = open_connection()
   cursor = mydb.cursor()
