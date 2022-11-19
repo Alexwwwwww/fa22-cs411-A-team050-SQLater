@@ -104,7 +104,7 @@ def show_hw_assignment():
   cursor.close()
   mydb.close()
   return assignments
-
+  
 def search_user_hw(data):
   mydb = open_connection()
   cursor = mydb.cursor()
