@@ -1,0 +1,24 @@
+.logo{
+font-family: 'Copse';
+font-style: normal;
+font-weight: 400;
+font-size: 28px;
+color: #FFFFFF;
+}
+
+.link{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+margin-top: 3px;
+color: #FFFFFF;
+margin-left: 10px;
+margin-right: 10px;
+}
+
+.home-style {
+color: #FFFFFF;
+margin-left: 10px;
+margin-right: 10px;
+}
