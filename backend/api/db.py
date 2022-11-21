@@ -16,9 +16,6 @@ def insert_hw_assignment(data):
   #MAKE INTO AUTOINCREMENT later
   mydb = open_connection()
   cursor = mydb.cursor()
-  # Other valid ways of formatting query
-  # query1 = "INSERT INTO Homework_Assignments(hw_id, hw_name) VALUES (" + str(data["hw_id"]) + ",'" + data["hw_name"] + "')"
-  # query2 = "INSERT INTO Homework_Assignments(hw_id, hw_name) VALUES ({}, '{}')".format(str(data["hw_id"]), str(data["hw_name"]))
   cursor.execute("INSERT INTO Homework_Assignments(hw_id, hw_name) VALUES (%s, %s)", (data["hw_id"], data["hw_name"]))
   cursor.close()
   mydb.close()
@@ -107,18 +104,7 @@ def show_hw_assignment():
   cursor.close()
   mydb.close()
   return assignments
-
-#Don't Need
-# def search_hw_assignment(data):
-#   mydb = open_connection()
-#   cursor = mydb.cursor()
-#   cursor.execute("SELECT * FROM Homework_Assignments WHERE hw_name LIKE %s", (data["hw_name_prefix"] + "%",))
-#   result = cursor.fetchall()
-#   assignments = jsonify(result)
-#   cursor.close()
-#   mydb.close()
-#   return assignments
-
+  
 def search_user_hw(data):
   mydb = open_connection()
   cursor = mydb.cursor()

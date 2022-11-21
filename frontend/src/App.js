@@ -1,21 +1,25 @@
 import React from "react";
 import "./App.css";
 import Assignments from "./components/Assignments.js";
-import Insert from "./components/Insert.js";
-import Update from "./components/Update";
-import Delete from "./components/Delete";
-import Query1 from "./components/Query1";
-import Query2 from "./components/Query2";
+import NavBar from "./NavBar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import HWPage from "./components/HWPage";
+import GAPage from "./components/GAPage";
+import EditPage from "./components/EditPage";
 
 function App() {
   return (
     <>
-      <Assignments />
-      <Insert />
-      <Update />
-      <Delete />
-      <Query1 />
-      <Query2 />
+      <NavBar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/hw" element={<HWPage />} />
+          <Route path="/ga" element={<GAPage />} />
+          <Route path="/edit" element={<EditPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
