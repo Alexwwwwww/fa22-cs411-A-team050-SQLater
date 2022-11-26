@@ -136,4 +136,16 @@ def insert_user(data):
   mydb.close()
   return 'INSERTED USER'
 
+def hw_mean(data):
+  mydb = open_connection()
+  query = ("SELECT AVG(Score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s and question_number= %s", (data["hw_id"], data["question_number"]))
+  cursor = mydb.cursor()
+  cursor.execute(query)
+  result = cursor.fetchall()
+  mean = jsonify(result)
+  cursor.close()
+  mydb.close()
+  return mean
+
+
 

@@ -94,6 +94,14 @@ def search_user():
 @cross_origin()
 def get_bar_graph_test():
   bargraphtest.test()
+  return show_hw
+
+@app.route('/getHW_Mean', methods=['GET'])
+@cross_origin()
+def get_hw_mean():
+  result = db.hw_mean(request.get_json())
+  return result
+  
 
 if __name__ == '__main__':
   app.run(debug=True)

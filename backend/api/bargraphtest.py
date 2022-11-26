@@ -22,7 +22,7 @@ def test():
     plt.title('My bar chart!')
 
     # function to show the plot
-    plt.show()
+    plt.savefig('mean.png')
 
 def __init__():
     pass

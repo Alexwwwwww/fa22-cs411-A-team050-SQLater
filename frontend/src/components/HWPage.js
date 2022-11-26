@@ -3,7 +3,7 @@ import Assignments from './Assignments';
 import axios from "axios";
 
 // import {PythonShell} from 'python-shell';
-
+// <figure><img src={`path/to/image/${image}`} alt="" /></figure>
 const HWPage = () => {
   const GetBarGraphTest = () => {
     axios({
@@ -18,6 +18,8 @@ const HWPage = () => {
     <>
       <Assignments />
       {GetBarGraphTest()}
+      <figure><img src={`backend/api/mean.png`} alt="" /></figure>
+      
     </>
   )
 }
