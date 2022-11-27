@@ -99,7 +99,7 @@ def get_bar_graph_test():
 @app.route('/getHW_Mean', methods=['GET', 'POST'])
 @cross_origin()
 def get_hw_mean():
-  result = db.hw_mean(request.get_json())
+  result = db.hw_question_means(request.get_json())
   return result
   
 

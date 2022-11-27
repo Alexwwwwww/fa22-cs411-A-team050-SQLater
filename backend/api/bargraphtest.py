@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
+import db
 
 def test():
+    # print("HERE 1")
+    # print(db.hw_question_means({"hw_id": 0}))
+    
     # x-coordinates of left sides of bars
     left = [1, 2, 3, 4, 5]
 
