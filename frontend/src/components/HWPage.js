@@ -17,9 +17,8 @@ const HWPage = () => {
   return (
     <>
       <Assignments />
-      {GetBarGraphTest()}
-      <figure><img src={`backend/api/mean.png`} alt="" /></figure>
-      
+      {/* {GetBarGraphTest()} */}
+      <figure><img src={"/images/mean.png"} alt="" /></figure>
     </>
   )
 }
