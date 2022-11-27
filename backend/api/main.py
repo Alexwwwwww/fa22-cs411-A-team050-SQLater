@@ -1,6 +1,8 @@
 #main.py
 from flask import Flask, jsonify, request
 import db
+import bargraphtest
+# from backend.graphs.bargraphtest import test
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
@@ -86,6 +88,20 @@ def search_user():
 # def delete_hw_sub():
 #   db.delete_hw_submission(request.get_json())
 #   return db.show_user()
+
+
+@app.route('/getBarGraphTest', methods=['GET'])
+@cross_origin()
+def get_bar_graph_test():
+  bargraphtest.test()
+  return "Bargraph generated"
+
+@app.route('/getHW_Mean', methods=['GET', 'POST'])
+@cross_origin()
+def get_hw_mean():
+  result = db.hw_mean(request.get_json())
+  return result
+  
 
 if __name__ == '__main__':
   app.run(debug=True)
