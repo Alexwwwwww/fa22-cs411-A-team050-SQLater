@@ -101,7 +101,12 @@ def get_bar_graph_test():
 def get_hw_mean():
   result = db.hw_mean(request.get_json())
   return result
-  
+
+# GA Assingment
+@app.route('/showGA', methods=['GET'])
+def show_ga():
+  result = db.show_hw_assignment()
+  return result
 
 if __name__ == '__main__':
   app.run(debug=True)
