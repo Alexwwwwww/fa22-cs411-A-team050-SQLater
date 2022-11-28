@@ -19,10 +19,9 @@ const NavBar = () => {
     });
   };
 
-  console.log(IsConnectionOpen())
-
   return (
     <>
+      {/* IsConnectionOpen() */}
       <Navbar bg="primary" variant="dark">
         <Container>
           <LocalLibraryIcon className="home-style" />

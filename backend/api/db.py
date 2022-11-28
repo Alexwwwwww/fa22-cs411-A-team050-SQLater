@@ -13,17 +13,13 @@ def open_connection():
 
 def is_connection_open():
   try:
-    print('HERE 1')
     open_connection()
-    print('HERE 2')
   except Exception as e:
-    print('HERE 3')
-    print(e)
     print('=====')
     print(type(e))
     print('=====')
-    return False
-  return True
+    return jsonify(False)
+  return jsonify(True)
 
 #Homework Assignment CRUD
 def insert_hw_assignment(data):
