@@ -11,6 +11,20 @@ def open_connection():
   mydb.autocommit = True
   return mydb
 
+def is_connection_open():
+  try:
+    print('HERE 1')
+    open_connection()
+    print('HERE 2')
+  except Exception as e:
+    print('HERE 3')
+    print(e)
+    print('=====')
+    print(type(e))
+    print('=====')
+    return False
+  return True
+
 #Homework Assignment CRUD
 def insert_hw_assignment(data):
   #MAKE INTO AUTOINCREMENT later
@@ -138,15 +152,22 @@ def insert_user(data):
 
 def hw_question_means(data):
   mydb = open_connection()
-  query = "SELECT question_number, AVG(score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s GROUP BY question_number", (data["hw_id"],)
   cursor = mydb.cursor()
-  cursor.execute(query)
+  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s GROUP BY question_number", (data["hw_id"],))
   columns = cursor.description 
   result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  means = jsonify(result)
+  cursor.close()
+  mydb.close()
+  return means
+
+def hw_question_mean(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s AND question_number = %s", (data["hw_id"], data["question_number"]))
+  result = cursor.fetchall()
   mean = jsonify(result)
   cursor.close()
   mydb.close()
   return mean
-
-
 

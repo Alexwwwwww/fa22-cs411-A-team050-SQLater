@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import db
 
+# Should have parameters tick_label, height, x_axis, y_axis, title, outfile
 def test():
     # print("HERE 1")
     # print(db.hw_question_means({"hw_id": 0}))

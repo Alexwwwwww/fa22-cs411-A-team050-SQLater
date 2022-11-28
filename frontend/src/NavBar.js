@@ -7,7 +7,20 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import { IconButton } from "@mui/material";
+import axios from "axios";
+
 const NavBar = () => {
+  const IsConnectionOpen = () => {
+    axios({
+      method: "GET",
+      url: "http://127.0.0.1:5000/isConnectionOpen",
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
+  console.log(IsConnectionOpen())
+
   return (
     <>
       <Navbar bg="primary" variant="dark">

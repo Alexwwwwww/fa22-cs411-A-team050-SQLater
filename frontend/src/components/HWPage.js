@@ -14,13 +14,26 @@ const HWPage = () => {
     });
   };
 
-
-  const GetBarGraphTest2 = (hw_id) => {
+  const GetHW_QuestionMeans = (hw_id) => {
     const data = {
       hw_id
     };
 
-    console.log("HERE 2")
+    axios({
+      method: "POST",
+      url: "http://127.0.0.1:5000/getHW_Means",
+      data: data,
+    }).then((response) => {
+      console.log(response.data);
+    });
+  }
+
+  const GetHW_QuestionMean = (hw_id, question_number) => {
+    const data = {
+      hw_id,
+      question_number
+    };
+
     axios({
       method: "POST",
       url: "http://127.0.0.1:5000/getHW_Mean",
@@ -29,12 +42,13 @@ const HWPage = () => {
       console.log(response.data);
     });
   }
+
+  // GetHW_QuestionMeans(0)
   
   return (
     <>
       <Assignments />
-      {GetBarGraphTest()}
-      {GetBarGraphTest2(0)}
+      {/* GetBarGraphTest() */}
       <figure><img src={"/images/mean.png"} alt="" /></figure>
     </>
   )

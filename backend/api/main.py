@@ -13,6 +13,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def home():
   return 'HOME PAGE'
 
+@app.route('/isConnectionOpen', methods=['GET'])
+@cross_origin()
+def is_connection_open():
+  result = db.is_connection_open()
+  return result
+
 #Homework Assignments CRUD
 @app.route('/showHW', methods=['GET'])
 def show_hw():
@@ -96,12 +102,17 @@ def get_bar_graph_test():
   bargraphtest.test()
   return "Bargraph generated"
 
+@app.route('/getHW_Means', methods=['GET', 'POST'])
+@cross_origin()
+def get_hw_means():
+  result = db.hw_question_means(request.get_json())
+  return result
+
 @app.route('/getHW_Mean', methods=['GET', 'POST'])
 @cross_origin()
 def get_hw_mean():
-  result = db.hw_question_means(request.get_json())
+  result = db.hw_question_mean(request.get_json())
   return result
-  
 
 if __name__ == '__main__':
   app.run(debug=True)
