@@ -27,7 +27,7 @@ const Delete = () => {
   return (
     <>
       <div>
-        <h3>Delete</h3>
+        <h4>Delete</h4>
         <form onSubmit={SubmitDeleteHandler}>
           <label>
             Enter the Hw_id:

@@ -35,7 +35,7 @@ const Update = () => {
   return (
     <>
       <div>
-        <h3>Update</h3>
+        <h4>Update</h4>
         <form onSubmit={SubmitUpdateHandler}>
           <label>
             Enter the Hw_id:
