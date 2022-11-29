@@ -23,7 +23,6 @@ def is_connection_open():
 
 #Homework Assignment CRUD
 def insert_hw_assignment(data):
-  #MAKE INTO AUTOINCREMENT later
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("INSERT INTO Homework_Assignments(hw_id, hw_name) VALUES (%s, %s)", (data["hw_id"], data["hw_name"]))
@@ -167,3 +166,21 @@ def hw_question_mean(data):
   mydb.close()
   return mean
 
+def update_ques_score(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("UPDATE Homework_Questions SET question_score=%s WHERE uin=%s AND hw_id=%s AND question_number=%s", (data["score"],data["uin"],data["hw_id"],data["ques"]))
+  cursor.close()
+  mydb.close()
+  return 'DONE'
+
+def view_total_score(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("SELECT score FROM Homework_Submissions WHERE uin=%s AND hw_id=%s", (data["uin"],data["hw_id"]))
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_hw_grade = jsonify(result)
+  cursor.close()
+  mydb.close()
+  return user_hw_grade

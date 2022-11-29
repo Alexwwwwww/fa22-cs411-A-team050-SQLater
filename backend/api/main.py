@@ -114,5 +114,18 @@ def get_hw_mean():
   result = db.hw_question_mean(request.get_json())
   return result
 
+#Update Question Score
+@app.route('/updateQuesScore', methods=['PUT'])
+@cross_origin()
+def update_ques_score():
+  return db.update_ques_score(request.get_json())
+
+#View Hw Score
+@app.route('/viewTotalScore', methods=['GET', 'POST'])
+@cross_origin()
+def view_total_score():
+  result = db.view_total_score(request.get_json())
+  return result
+
 if __name__ == '__main__':
   app.run(debug=True)
