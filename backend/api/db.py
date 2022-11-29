@@ -147,14 +147,21 @@ def hw_mean(data):
   mydb.close()
   return mean
 
+# search for a user by group ID
 def search_user_ga(data):
   mydb = open_connection()
   cursor = mydb.cursor()
-  cursor.execute("SELECT * FROM GA_Submissions WHERE uin=%s", (data["uin"],))
+  cursor.execute("SELECT * FROM GA_Submissions WHERE group_id=%s", (data["group_id"],))
   columns = cursor.description 
   result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
   user_grades = jsonify(result)
   cursor.close()
   mydb.close()
   return user_grades
+
+# search for a user by uin
+# def search_ga_by_uin(data):
+#   mydb = open_connection()
+#   cursor = mydb.cursor()
+#   cursor.execute("SELECT * FROM GA_Assignments WHERE uin=%s", (data["uin"],))
 

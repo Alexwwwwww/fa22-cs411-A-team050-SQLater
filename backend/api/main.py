@@ -105,8 +105,18 @@ def get_hw_mean():
 # GA Assingment
 @app.route('/showGA', methods=['GET'])
 def show_ga():
-  result = db.show_hw_assignment()
+  result = db.show_ga_assignment()
   return result
+
+# @app.route('/showGAbyUIN', methods=['GET'])
+# def show_ga():
+#   result = db.show_ga_assignment_uin()
+#   return result
+
+@app.route('/searchUserGA', methods=['POST', 'GET'])
+@cross_origin()
+def search_user_ga():
+  return db.search_user_ga(request.get_json())
 
 if __name__ == '__main__':
   app.run(debug=True)

@@ -4,14 +4,14 @@ const GAs = () => {
     const [gas, setGas] = useState([{}]);
     const [userGASubmissions, setGASubmissions] = useState([{}]);
     const [isShown, setIsShown] = useState(false);
-    const [enteredUIN, setEnteredUIN] = useState("");
+    const [enteredgroupID, setEnteredgroupID] = useState("");
 
-    const uinChangeHandler = async (event) => {
-      setEnteredUIN(event.target.value);
+    const groupIDChangeHandler = async (event) => {
+      setEnteredgroupID(event.target.value);
       console.log(event.target.value);
     };
 
-    const displayAssignmentHandler = () => {
+    const displayGAAssignmentHandler = () => {
       setIsShown((current) => !current);
       console.log(isShown);
       if (isShown) {
@@ -23,13 +23,26 @@ const GAs = () => {
           });
       }
     };
+    // add a new buttom to show the GA assignments by uin
+    const displayGAAssignmentHandleronUIN = (event) => {
+      setIsShown((current) => !current);
+      console.log(isShown);
+      if (isShown) {
+        fetch("/showGAbyUIN")
+          .then((res) => res.json())
+          .then((gas) => {
+            setGas(gas);
+            console.log(gas);
+          });
+      }
+    };
 
-    const SubmitUINHandler = (event) => {
+    const SubmitgroupIDHandler = (event) => {
       event.preventDefault();
       console.log("Sending POST API CALL");
   
       const data = {
-        uin: enteredUIN,
+        group_id: enteredgroupID,
       };
   
       axios({
@@ -40,24 +53,24 @@ const GAs = () => {
         setGASubmissions(response.data);
         console.log(response.data);
       });
-      setEnteredUIN("");
+      setEnteredgroupID("");
       setGASubmissions([{}]);
     };
     return (
       <>
         <div>
-          <button onClick={displayAssignmentHandler}>Show GA assignments</button>
+          <button onClick={displayGAAssignmentHandler}>Show GA assignments</button>
           {isShown &&
             gas.map((ga) => <li key={ga.ga_id}>{ga.ga_name}</li>)}
         </div>
         <div>
-          <form onSubmit={SubmitUINHandler}>
+          <form onSubmit={SubmitgroupIDHandler}>
             <label>
-              Enter Student UIN to see GAs:
+              Enter group ID to see GAs:
               <input
                 type="text"
-                value={enteredUIN}
-                onChange={uinChangeHandler}
+                value={enteredgroupID}
+                onChange={groupIDChangeHandler}
               ></input>
               <button type="submit">Submit</button>
             </label>
@@ -81,6 +94,7 @@ const GAs = () => {
         </div>
       </>
     );
+
   };
   
   export default GAs;
