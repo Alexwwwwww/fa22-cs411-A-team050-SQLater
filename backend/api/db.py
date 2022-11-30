@@ -102,6 +102,18 @@ def search_user_hw(data):
   mydb.close()
   return user_grades
 
+def get_hw_ids():
+  mydb = open_connection()
+  query = ("SELECT * FROM Homework_Assignments")
+  cursor = mydb.cursor()
+  cursor.execute(query)
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  return [hw_assignment['hw_id'] for hw_assignment in result]
+
+def get_hw_assignent_count():
+  return len(get_hw_ids)
+
 def show_hw_assignment():
   mydb = open_connection()
   query = ("SELECT * FROM Homework_Assignments")
@@ -145,16 +157,18 @@ def insert_user(data):
   mydb.close()
   return 'INSERTED USER'
 
-def hw_question_means(data):
+def hw_question_means_list(hw_id):
   mydb = open_connection()
   cursor = mydb.cursor()
-  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s GROUP BY question_number", (data["hw_id"],))
+  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s GROUP BY question_number", (hw_id,))
   columns = cursor.description 
   result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
-  means = jsonify(result)
   cursor.close()
   mydb.close()
-  return means
+  return result
+
+def hw_question_means(data):
+  return jsonify(hw_question_means_list(data["hw_id"]))
 
 def hw_question_mean(data):
   mydb = open_connection()

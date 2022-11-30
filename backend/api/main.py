@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request
 import db
 import bargraphtest
+import bargraphs
 # from backend.graphs.bargraphtest import test
 from flask_cors import CORS, cross_origin
 
@@ -100,6 +101,13 @@ def search_user():
 @cross_origin()
 def get_bar_graph_test():
   bargraphtest.test()
+  return "Bargraph generated"
+
+@app.route('/getHW_MeansBarGraph', methods=['POST'])
+@cross_origin()
+def get_hw_means_bar_graph():
+  data = request.get_json()
+  bargraphs.get_hw_means(data['hw_id'])
   return "Bargraph generated"
 
 @app.route('/getHW_Means', methods=['GET', 'POST'])
