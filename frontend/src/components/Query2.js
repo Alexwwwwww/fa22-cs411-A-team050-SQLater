@@ -31,14 +31,14 @@ const Query2 = () => {
     <>
       <form onSubmit={SubmitGradeFilterHandler}>
         <label>
-          Get all students with an average grade above:
+          List of students average grade above:
           <input
             type="text"
             value={enteredGradeFilter}
             onChange={enteredGradeChangeHandler}
           ></input>
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">View</button>
         <table>
           <tr>
             <th>UIN</th>

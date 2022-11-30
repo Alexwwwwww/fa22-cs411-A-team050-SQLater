@@ -57,7 +57,7 @@ const Trigger = () => {
   return (
     <>
       <div>
-        <h4>Update Question Score</h4>
+        <h4>Regrade a Student's HW Question</h4>
         <form onSubmit={SubmitHandler}>
           <label>
             Enter the uin:
@@ -93,21 +93,15 @@ const Trigger = () => {
             <button type="submit">Submit</button>
           </label>
         </form>
-        <h4>View HW Score</h4>
+        <h4>View Student's Total Score</h4>
         <form onSubmit={ViewHandler}>
           <label>uin: &nbsp;{enteredUIN}</label>
           <label>
             &nbsp;&nbsp;hw_id: &nbsp;{enteredHW_id}&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit">Run Query</button>
+            <button type="submit">View</button>
           </label>
           <br />
           <label>Result: {totalScore}</label>
-          <h5>You ran this query</h5>
-          <pre>
-            <code>
-              {`SELECT score FROM Homework_Submissions WHERE uin=${enteredUIN} AND hw_id=${enteredHW_id}`}
-            </code>
-          </pre>
         </form>
       </div>
     </>

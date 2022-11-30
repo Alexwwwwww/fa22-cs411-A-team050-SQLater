@@ -36,7 +36,7 @@ const Insert = () => {
   return (
     <>
       <div>
-        <h4>Insert</h4>
+        <h4>Add a Homework Assignment</h4>
         <form onSubmit={SubmitInsertHandler}>
           <label>
             Enter the Hw_id:

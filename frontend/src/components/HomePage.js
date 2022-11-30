@@ -5,8 +5,9 @@ import Query2 from "./Query2";
 const HomePage = () => {
   return (
     <>
-      <Query1 />
+    <h3>Welcome Professor,</h3>
       <Query2 />
+      <Query1 />
     </>
   );
 };

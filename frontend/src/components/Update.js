@@ -35,7 +35,7 @@ const Update = () => {
   return (
     <>
       <div>
-        <h4>Update</h4>
+        <h4>Change Homework Title</h4>
         <form onSubmit={SubmitUpdateHandler}>
           <label>
             Enter the Hw_id:
