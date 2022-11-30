@@ -58,8 +58,6 @@ const HWPage = () => {
     });
   }
 
-  // SaveHW_QuestionMeansPNG(0)
-
   const getHW_MeansGraph = (hw_id) => {
     SaveHW_QuestionMeansPNG(hw_id)
     const graphFile = `/images/hw_means_${hw_id}.png`

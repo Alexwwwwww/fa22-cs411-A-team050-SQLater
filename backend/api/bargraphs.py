@@ -16,9 +16,9 @@ result=[{'question_number': 1, 'AVG(question_score)': 17.374505928853754}, \
 def get_hw_means(hw_id):
     result = db.hw_question_means_list(hw_id)
     tick_label = [x['question_number'] for x in result]
-    print(tick_label)
     height = [x['AVG(question_score)'] for x in result]
-    print(height)
     output_file = f'../../frontend/public/images/hw_means_{hw_id}.png'
-    print(f'{output_file=}')
-    bargraphplotter.save_bar_graph_as_png(tick_label, height, output_file)
+    x_label = 'Question Number'
+    y_label = 'Mean Score'
+    title = 'Problem Breakdown'
+    bargraphplotter.save_bar_graph_as_png(tick_label, height, output_file, x_label=x_label, y_label=y_label, title=title)

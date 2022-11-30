@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 const ButtonGraph = ({title, getGraph}) => {
     const [input, setInput] = useState("")
-    const [graphFigure, setGraphFigure] = useState()
+    const [graphFile, setGraphFile] = useState()
     const GraphInputChangeHandler = async (event) => {
         setInput(event.target.value);
     };
     const SubmitGraphHandler = async (event) => {
         event.preventDefault()
-        setGraphFigure(<figure><img src={getGraph(input)} alt="Graph" /></figure>)
+        setGraphFile(getGraph(input))
     }
 
     return (
@@ -24,7 +24,7 @@ const ButtonGraph = ({title, getGraph}) => {
                     <button type="submit">Submit</button>
                 </label>
             </form>
-            {graphFigure}
+            {graphFile && <figure><img src={graphFile} alt="Graph" /></figure>}
         </>
     )
 }
