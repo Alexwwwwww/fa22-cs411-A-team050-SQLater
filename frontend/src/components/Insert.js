@@ -36,7 +36,7 @@ const Insert = () => {
   return (
     <>
       <div>
-        <h3>Insert</h3>
+        <h4>Insert</h4>
         <form onSubmit={SubmitInsertHandler}>
           <label>
             Enter the Hw_id:

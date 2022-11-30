@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request
 import db
 import bargraphtest
+import bargraphs
 # from backend.graphs.bargraphtest import test
 from flask_cors import CORS, cross_origin
 
@@ -12,6 +13,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/')
 def home():
   return 'HOME PAGE'
+
+@app.route('/isConnectionOpen', methods=['GET'])
+@cross_origin()
+def is_connection_open():
+  result = db.is_connection_open()
+  return result
 
 #Homework Assignments CRUD
 @app.route('/showHW', methods=['GET'])
@@ -96,12 +103,37 @@ def get_bar_graph_test():
   bargraphtest.test()
   return "Bargraph generated"
 
+@app.route('/getHW_MeansBarGraph', methods=['POST'])
+@cross_origin()
+def get_hw_means_bar_graph():
+  data = request.get_json()
+  bargraphs.get_hw_means(data['hw_id'])
+  return "Bargraph generated"
+
+@app.route('/getHW_Means', methods=['GET', 'POST'])
+@cross_origin()
+def get_hw_means():
+  result = db.hw_question_means(request.get_json())
+  return result
+
 @app.route('/getHW_Mean', methods=['GET', 'POST'])
 @cross_origin()
 def get_hw_mean():
-  result = db.hw_mean(request.get_json())
+  result = db.hw_question_mean(request.get_json())
   return result
-  
+
+#Update Question Score
+@app.route('/updateQuesScore', methods=['PUT'])
+@cross_origin()
+def update_ques_score():
+  return db.update_ques_score(request.get_json())
+
+#View Hw Score
+@app.route('/viewTotalScore', methods=['GET', 'POST'])
+@cross_origin()
+def view_total_score():
+  result = db.view_total_score(request.get_json())
+  return result
 
 if __name__ == '__main__':
   app.run(debug=True)

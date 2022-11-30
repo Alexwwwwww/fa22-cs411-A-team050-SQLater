@@ -11,9 +11,18 @@ def open_connection():
   mydb.autocommit = True
   return mydb
 
+def is_connection_open():
+  try:
+    open_connection()
+  except Exception as e:
+    print('=====')
+    print(type(e))
+    print('=====')
+    return jsonify(False)
+  return jsonify(True)
+
 #Homework Assignment CRUD
 def insert_hw_assignment(data):
-  #MAKE INTO AUTOINCREMENT later
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("INSERT INTO Homework_Assignments(hw_id, hw_name) VALUES (%s, %s)", (data["hw_id"], data["hw_name"]))
@@ -93,6 +102,18 @@ def search_user_hw(data):
   mydb.close()
   return user_grades
 
+def get_hw_ids():
+  mydb = open_connection()
+  query = ("SELECT * FROM Homework_Assignments")
+  cursor = mydb.cursor()
+  cursor.execute(query)
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  return [hw_assignment['hw_id'] for hw_assignment in result]
+
+def get_hw_assignent_count():
+  return len(get_hw_ids)
+
 def show_hw_assignment():
   mydb = open_connection()
   query = ("SELECT * FROM Homework_Assignments")
@@ -136,16 +157,44 @@ def insert_user(data):
   mydb.close()
   return 'INSERTED USER'
 
-def hw_mean(data):
+def hw_question_means_list(hw_id):
   mydb = open_connection()
-  query = ("SELECT AVG(Score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s and question_number= %s", (data["hw_id"], data["question_number"]))
   cursor = mydb.cursor()
-  cursor.execute(query)
+  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s GROUP BY question_number", (hw_id,))
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  cursor.close()
+  mydb.close()
+  return result
+
+def hw_question_means(data):
+  return jsonify(hw_question_means_list(data["hw_id"]))
+
+def hw_question_mean(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("SELECT question_number, AVG(question_score) FROM Homework_Submissions NATURAL JOIN Homework_Questions WHERE hw_id = %s AND question_number = %s", (data["hw_id"], data["question_number"]))
   result = cursor.fetchall()
   mean = jsonify(result)
   cursor.close()
   mydb.close()
   return mean
 
+def update_ques_score(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("UPDATE Homework_Questions SET question_score=%s WHERE uin=%s AND hw_id=%s AND question_number=%s", (data["score"],data["uin"],data["hw_id"],data["ques"]))
+  cursor.close()
+  mydb.close()
+  return 'DONE'
 
-
+def view_total_score(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("SELECT score FROM Homework_Submissions WHERE uin=%s AND hw_id=%s", (data["uin"],data["hw_id"]))
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_hw_grade = jsonify(result)
+  cursor.close()
+  mydb.close()
+  return user_hw_grade
