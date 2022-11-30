@@ -160,8 +160,14 @@ def search_user_ga(data):
   return user_grades
 
 # search for a user by uin
-# def search_ga_by_uin(data):
-#   mydb = open_connection()
-#   cursor = mydb.cursor()
-#   cursor.execute("SELECT * FROM GA_Assignments WHERE uin=%s", (data["uin"],))
+def search_ga_by_uin(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("SELECT * FROM GA_Group_Members NATURAL JOIN GA_Submissions WHERE uin=%s", (data["uin"],)) #TODO: fix this query
+  columns = cursor.description 
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_grades = jsonify(result)
+  cursor.close()
+  mydb.close()
+  return user_grades
 

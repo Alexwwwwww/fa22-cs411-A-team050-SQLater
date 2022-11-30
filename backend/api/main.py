@@ -108,10 +108,11 @@ def show_ga():
   result = db.show_ga_assignment()
   return result
 
-# @app.route('/showGAbyUIN', methods=['GET'])
-# def show_ga():
-#   result = db.show_ga_assignment_uin()
-#   return result
+@app.route('/searchGAbyUIN', methods=['POST','GET'])
+@cross_origin()
+def search_user_by_uin():
+  result = db.search_ga_by_uin(request.get_json())
+  return result
 
 @app.route('/searchUserGA', methods=['POST', 'GET'])
 @cross_origin()
