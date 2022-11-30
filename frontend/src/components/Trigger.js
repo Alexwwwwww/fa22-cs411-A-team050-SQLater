@@ -102,6 +102,12 @@ const Trigger = () => {
           </label>
           <br />
           <label>Result: {totalScore}</label>
+          <h5>You ran this query</h5>
+          <pre>
+            <code>
+              {`SELECT score FROM Homework_Submissions WHERE uin=${enteredUIN} AND hw_id=${enteredHW_id}`}
+            </code>
+          </pre>
         </form>
       </div>
     </>

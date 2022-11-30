@@ -1,13 +1,13 @@
 import React from "react";
 import Query1 from "./Query1";
 import Query2 from "./Query2";
-import Grade from "./GradeBar";
+import GradeBar from "./GradeBar";
 
 const HomePage = () => {
   return (
     <>
       <h3>Welcome Professor,</h3>
-      <Grade />
+      <GradeBar />
       <Query2 />
       <Query1 />
     </>
