@@ -9,6 +9,7 @@ import GAPage from "./components/GAPage";
 import EditPage from "./components/EditPage";
 
 function App() {
+  
   return (
     <>
       <NavBar />

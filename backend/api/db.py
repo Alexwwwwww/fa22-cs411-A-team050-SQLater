@@ -238,7 +238,7 @@ def stored_procedure_Cutoff(data):
   mydb = open_connection()
   cursor = mydb.cursor()
   cursor.execute("call GradeStudents(%s,%s,%s,%s)", (data["A"],data["B"],data["C"],data["D"]))
-  cursor.execute("SELECT * FROM CutOff")
+  cursor.execute("SELECT * FROM CutOffs")
   columns = cursor.description 
   result_cutoff = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
   user_cutoff= jsonify(result_cutoff)
