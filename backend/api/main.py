@@ -152,5 +152,15 @@ def search_user_by_uin():
 def search_user_ga():
   return db.search_user_ga(request.get_json())
 
+@app.route('/stored_procedure_gradebook', methods=['POST', 'GET'])
+@cross_origin()
+def stored_procedure_gradebook():
+  return db.stored_procedure_Gradebook(request.get_json())
+
+@app.route('/stored_procedure_cutoff', methods=['POST', 'GET'])
+@cross_origin()
+def stored_procedure_cutoff():
+  return db.stored_procedure_Cutoff(request.get_json())
+
 if __name__ == '__main__':
   app.run(debug=True)

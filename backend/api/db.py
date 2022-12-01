@@ -222,3 +222,27 @@ def search_ga_by_uin(data):
   mydb.close()
   return user_grades
 
+def stored_procedure_Gradebook(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("call GradeStudents(%s,%s,%s,%s)", (data["A"],data["B"],data["C"],data["D"]))
+  cursor.execute("SELECT * FROM GradeBook") 
+  columns = cursor.description 
+  result_gradebook = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_gradebook = jsonify(result_gradebook)
+  cursor.close()
+  mydb.close()
+  return user_gradebook
+
+def stored_procedure_Cutoff(data):
+  mydb = open_connection()
+  cursor = mydb.cursor()
+  cursor.execute("call GradeStudents(%s,%s,%s,%s)", (data["A"],data["B"],data["C"],data["D"]))
+  cursor.execute("SELECT * FROM CutOff")
+  columns = cursor.description 
+  result_cutoff = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_cutoff= jsonify(result_cutoff)
+  cursor.close()
+  mydb.close()
+  return user_cutoff
+
