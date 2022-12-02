@@ -2,7 +2,6 @@ import React from 'react';
 import Assignments from './Assignments';
 import axios from 'axios';
 import ButtonGraph from './ButtonGraph'
-import Stored_Procedure from './Stored_Procedure';
 
 // import {PythonShell} from 'python-shell';
 // <figure><img src={`path/to/image/${image}`} alt="" /></figure>
@@ -74,7 +73,6 @@ const HWPage = () => {
         getGraph={getHW_MeansGraph}
       />
       <br />
-      <Stored_Procedure />
     </>
   )
 }

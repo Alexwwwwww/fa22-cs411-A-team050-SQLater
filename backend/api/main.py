@@ -162,5 +162,10 @@ def stored_procedure_gradebook():
 def stored_procedure_cutoff():
   return db.stored_procedure_Cutoff(request.get_json())
 
+@app.route('/searchUserGrade', methods=['POST', 'GET'])
+@cross_origin()
+def search_user_grade():
+  return db.search_user_grade(request.get_json())
+
 if __name__ == '__main__':
   app.run(debug=True)
