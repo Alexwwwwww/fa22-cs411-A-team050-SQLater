@@ -222,27 +222,37 @@ def search_ga_by_uin(data):
   mydb.close()
   return user_grades
 
+def stored_procedure_Cutoff(cutoffs):
+  # cutoffs_return = jsonify(cutoffs)
+  # return cutoffs_return
+  return 'ignore'
+
 def stored_procedure_Gradebook(data):
   mydb = open_connection()
   cursor = mydb.cursor()
-  cursor.execute("call GradeStudents(%s,%s,%s,%s)", (data["A"],data["B"],data["C"],data["D"]))
-  cursor.execute("SELECT * FROM GradeBook") 
+  args = (data["A"],data["B"],data["C"],data["D"])
+  cursor.callproc('GradeStudents', args)
+  cursor.execute("SELECT * FROM CutOffs") 
+  columns = cursor.description 
+  result_cutoffs = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  # cutoffs = jsonify(result_cutoffs)
+  # stored_procedure_Cutoff(result_cutoffs)
+  cursor.execute("SELECT * FROM GradeBook LIMIT 20") 
   columns = cursor.description 
   result_gradebook = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
-  user_gradebook = jsonify(result_gradebook)
+  # user_gradebook = jsonify(result_gradebook)
   cursor.close()
   mydb.close()
-  return user_gradebook
+  result = jsonify([result_gradebook, result_cutoffs])
+  return result
 
-def stored_procedure_Cutoff(data):
+def search_user_grade(data):
   mydb = open_connection()
   cursor = mydb.cursor()
-  cursor.execute("call GradeStudents(%s,%s,%s,%s)", (data["A"],data["B"],data["C"],data["D"]))
-  cursor.execute("SELECT * FROM CutOffs")
+  cursor.execute("SELECT * FROM GradeBook WHERE uin=%s", (data["uin"],))
   columns = cursor.description 
-  result_cutoff = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
-  user_cutoff= jsonify(result_cutoff)
+  result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+  user_grades = jsonify(result)
   cursor.close()
   mydb.close()
-  return user_cutoff
-
+  return user_grades
